@@ -37,7 +37,6 @@ CREATE NONCLUSTERED INDEX [fkIdx_address_company_id] ON [Address]
  (
   [company_id] ASC
  )
-
 GO
 
 -- Customer
@@ -65,7 +64,6 @@ CREATE NONCLUSTERED INDEX [fkIdx_customer_address_id] ON [Customer]
  (
   [address_id] ASC
  )
-
 GO
 
 -- Product
@@ -111,8 +109,7 @@ CREATE NONCLUSTERED INDEX [fkIdx_comment_product_id] ON [Comment]
  (
   [product_id] ASC
  )
-
-GO
+ GO
 
 -- Rating
 CREATE TABLE [Rating]
@@ -134,14 +131,12 @@ CREATE NONCLUSTERED INDEX [fkIdx_rating_customer_id] ON [Rating]
  (
   [customer_id] ASC
  )
-
 GO
 
 CREATE NONCLUSTERED INDEX [fkIdx_rating_product_id] ON [Rating] 
  (
   [product_id] ASC
  )
-
 GO
 
 -- Cart
@@ -163,7 +158,6 @@ CREATE NONCLUSTERED INDEX [car_customer_id] ON [Cart]
  (
   [customer_id] ASC
  )
-
 GO
 
 -- CartItems
@@ -186,14 +180,12 @@ CREATE NONCLUSTERED INDEX [fkIdx_cart_items_cart_id] ON [CartItems]
  (
   [cart_id] ASC
  )
-
 GO
 
 CREATE NONCLUSTERED INDEX [fkIdx_cart_items_product_id] ON [CartItems] 
  (
   [product_id] ASC
  )
-
 GO
 
 -- Orders
@@ -220,19 +212,17 @@ CREATE NONCLUSTERED INDEX [fkIdx_orders_customer_id] ON [Orders]
  (
   [customer_id] ASC
  )
-
 GO
 
 CREATE NONCLUSTERED INDEX [fkIdx_orders_address_id] ON [Orders] 
  (
   [address_id] ASC
  )
- GO
+GO
  
  CREATE NONCLUSTERED INDEX [fkIdx_orders_cart_items_id] ON [Orders] 
  (
   [cart_item_id] ASC
  )
-
 GO
 
