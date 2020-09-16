@@ -1,0 +1,1 @@
+### SQL table design for an online store
