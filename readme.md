@@ -1,1 +1,1 @@
-### SQL table design for an online store
+### SQL database design for an online store
