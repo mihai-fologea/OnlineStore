@@ -1,236 +1,163 @@
--- Company
-DROP TABLE IF EXISTS [Company];
-CREATE TABLE [Company]
-(
-    [company_id] int NOT NULL ,
-    [companyName] varchar(30) NOT NULL ,
-    [tax_id] varchar(10) NOT NULL ,
-    [address] varchar(200) NOT NULL ,
-    [city] varchar(20) NOT NULL ,
-    [postcode] varchar(10) NOT NULL ,
+USE master;
+ALTER DATABASE [OnlineStore] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+DROP DATABASE [OnlineStore];
 
+CREATE DATABASE [OnlineStore];
+GO
 
-    CONSTRAINT [PK_company] PRIMARY KEY CLUSTERED ([company_id] ASC)
+USE OnlineStore;
+
+DROP TABLE IF EXISTS [Customer]
+CREATE TABLE [Customer] (
+   [customer_id] INT IDENTITY,
+   [email] VARCHAR(50) NOT NULL,
+   [password] VARCHAR(16) NOT NULL,
+   [first_name] VARCHAR(20) NOT NULL,
+   [last_name] VARCHAR(20) NOT NULL,
+   [birth_date] DATE,
+   [gender_id] SMALLINT NOT NULL,
+   [address_id] INT NOT NULL,
+   [registered] DATETIME2(0) NOT NULL,
+   PRIMARY KEY ([customer_id]),
+   CONSTRAINT unique_customer_id UNIQUE (customer_id),
+   CONSTRAINT unique_email UNIQUE (email)
+);
+GO
+
+DROP TABLE IF EXISTS [Address]
+CREATE TABLE [Address] (
+   [address_id] INT NOT NULL IDENTITY,
+   [first_name] VARCHAR(20) NOT NULL,
+   [last_name] VARCHAR(20) NOT NULL,
+   [phone_number] VARCHAR(20) NOT NULL,
+   [street_address] VARCHAR(200) NOT NULL,
+   [postal_code] VARCHAR(10) NOT NULL,
+   [company_id] INT,
+   PRIMARY KEY ([address_id]),
+   CONSTRAINT unique_address_id UNIQUE (address_id)
 );
 GO
 
 
--- Address
-DROP TABLE IF EXISTS [Address];
-CREATE TABLE [Address]
-(
-    [address_id] int NOT NULL ,
-    [firstName] varchar(20) NOT NULL ,
-    [lastName] varchar(20) NOT NULL ,
-    [address] varchar(200) NOT NULL ,
-    [city] varchar(20) NOT NULL ,
-    [postCode] varchar(10) NOT NULL ,
-    [phoneNumber] varchar(20) NOT NULL ,
-    [company_id] int NOT NULL ,
-
-
-    CONSTRAINT [PK_address] PRIMARY KEY CLUSTERED ([address_id] ASC),
-    CONSTRAINT [FK_address_company_id] FOREIGN KEY ([company_id])  REFERENCES [Company]([company_id])
+DROP TABLE IF EXISTS [Company]
+CREATE TABLE [Company] (
+   [company_id] INT NOT NULL IDENTITY,
+   [tax_id] VARCHAR(10) NOT NULL,
+   [street_address] VARCHAR(200) NOT NULL,
+   [city] VARCHAR(20) NOT NULL,
+   [post_code] VARCHAR(10) NOT NULL,
+   PRIMARY KEY ([company_id])
 );
 GO
 
-
-CREATE NONCLUSTERED INDEX [fkIdx_address_company_id] ON [Address] 
- (
-  [company_id] ASC
- )
-GO
-
--- Customer
-DROP TABLE IF EXISTS [Customer];
-CREATE TABLE [Customer]
-(
-    [customer_id] int NOT NULL ,
-    [email] varchar(50) NOT NULL ,
-    [password] varchar(16) NOT NULL ,
-    [firstName] varchar(20) NOT NULL ,
-    [lastName] varchar(20) NOT NULL ,
-    [added] datetime NOT NULL ,
-    [gender] varchar(8) NOT NULL ,
-    [birthDate] date NOT NULL ,
-    [address_id] int NOT NULL ,
-    [registered] datetime NOT NULL ,
-
-
-    CONSTRAINT [PK_credentials] PRIMARY KEY CLUSTERED ([customer_id] ASC),
-    CONSTRAINT [FK_customer_address_id] FOREIGN KEY ([address_id])  REFERENCES [Address]([address_id])
+DROP TABLE IF EXISTS [Product]
+CREATE TABLE [Product] (
+   [product_id] INT NOT NULL IDENTITY,
+   [name] VARCHAR(50) NOT NULL,
+   [category_id] INT NOT NULL,
+   [description] VARCHAR(1000) NOT NULL,
+   [image] VARBINARY(MAX) NOT NULL,
+   [stock] INT NOT NULL,
+   [price] DECIMAL(13,4) NOT NULL,
+   PRIMARY KEY ([product_id]),
+   CONSTRAINT unique_product_id UNIQUE (product_id)
 );
 GO
 
-
-CREATE NONCLUSTERED INDEX [fkIdx_customer_address_id] ON [Customer] 
- (
-  [address_id] ASC
- )
-GO
-
--- Product
-DROP TABLE IF EXISTS [Product];
-CREATE TABLE [Product]
-(
-    [product_id] int NOT NULL ,
-    [productName] varchar(50) NOT NULL ,
-    [productType] varchar(50) NOT NULL ,
-    [productDescription] varchar(1000) NOT NULL ,
-    [productImage] varbinary(max) NOT NULL ,
-    [stock] decimal(18,2) NOT NULL ,
-    [price] money NOT NULL ,
-
-
-    CONSTRAINT [PK_product] PRIMARY KEY CLUSTERED ([product_id] ASC)
+DROP TABLE IF EXISTS [ProductCategory]
+CREATE TABLE [ProductCategory] (
+   [product_category_id] INT NOT NULL IDENTITY,
+   [category] VARCHAR(30) NOT NULL,
+   PRIMARY KEY ([product_category_id]),
+   CONSTRAINT unique_product_category_id UNIQUE (product_category_id)
 );
 GO
 
--- Comment
-DROP TABLE IF EXISTS [Comment];
-CREATE TABLE [Comment]
-(
-    [comment_id] int NOT NULL ,
-    [customer_id] int NOT NULL ,
-    [product_id] int NOT NULL ,
-    [message] varchar(500) NOT NULL ,
-
-
-    CONSTRAINT [PK_comment] PRIMARY KEY CLUSTERED ([comment_id] ASC),
-    CONSTRAINT [FK_comment_customer_id] FOREIGN KEY ([customer_id])  REFERENCES [Customer]([customer_id]),
-    CONSTRAINT [FK_comment_product_id] FOREIGN KEY ([product_id])  REFERENCES [Product]([product_id])
+DROP TABLE IF EXISTS [Gender]
+CREATE TABLE [Gender] (
+   [gender_id] SMALLINT NOT NULL IDENTITY,
+   [type] VARCHAR(10) NOT NULL,
+   PRIMARY KEY ([gender_id]),
+   CONSTRAINT unique_gender_id UNIQUE (gender_id)
 );
 GO
 
-
-CREATE NONCLUSTERED INDEX [fkIdx_comment_customer_id] ON [Comment] 
- (
-  [customer_id] ASC
- )
-
-GO
-
-CREATE NONCLUSTERED INDEX [fkIdx_comment_product_id] ON [Comment] 
- (
-  [product_id] ASC
- )
- GO
-
--- Rating
-DROP TABLE IF EXISTS [Rating];
-CREATE TABLE [Rating]
-(
-    [rating_id] int NOT NULL ,
-    [customer_id] int NOT NULL ,
-    [product_id] int NOT NULL ,
-    [value] decimal(18,2) NOT NULL ,
-
-
-    CONSTRAINT [PK_rating] PRIMARY KEY CLUSTERED ([rating_id] ASC),
-    CONSTRAINT [FK_rating_customer_id] FOREIGN KEY ([customer_id])  REFERENCES [Customer]([customer_id]),
-    CONSTRAINT [FK_rating_product_id] FOREIGN KEY ([product_id])  REFERENCES [Product]([product_id])
+DROP TABLE IF EXISTS [Cart]
+CREATE TABLE [Cart] (
+   [cart_id] INT NOT NULL IDENTITY,
+   [customer_id] INT NOT NULL,
+   [created] DATETIME2(0) NOT NULL,
+   [modified] DATETIME2(0) NOT NULL,
+   PRIMARY KEY ([cart_id]),
+   CONSTRAINT unique_cart_id UNIQUE (cart_id)
 );
 GO
 
-
-CREATE NONCLUSTERED INDEX [fkIdx_rating_customer_id] ON [Rating] 
- (
-  [customer_id] ASC
- )
-GO
-
-CREATE NONCLUSTERED INDEX [fkIdx_rating_product_id] ON [Rating] 
- (
-  [product_id] ASC
- )
-GO
-
--- Cart
-DROP TABLE IF EXISTS [Cart];
-CREATE TABLE [Cart]
-(
-    [cart_id] int NOT NULL ,
-    [customer_id] int NOT NULL ,
-    [dateCreated] datetime NOT NULL ,
-    [status] bit NOT NULL ,
-
-
-    CONSTRAINT [PK_cart] PRIMARY KEY CLUSTERED ([cart_id] ASC),
-    CONSTRAINT [FK_car_customer_id] FOREIGN KEY ([customer_id])  REFERENCES [Customer]([customer_id])
+DROP TABLE IF EXISTS [CartItem]
+CREATE TABLE [CartItem] (
+   [cart_item_id] INT NOT NULL IDENTITY,
+   [cart_id] INT NOT NULL,
+   [product_id] INT NOT NULL,
+   [quantity] DECIMAL(13, 4) NOT NULL,
+   PRIMARY KEY ([cart_item_id]),
+   CONSTRAINT unique_cart_item_id UNIQUE (cart_item_id)
 );
 GO
 
-
-CREATE NONCLUSTERED INDEX [car_customer_id] ON [Cart] 
- (
-  [customer_id] ASC
- )
-GO
-
--- CartItems
-DROP TABLE IF EXISTS [CartItems]
-CREATE TABLE [CartItems]
-(
-    [cart_item_id] int NOT NULL ,
-    [cart_id] int NOT NULL ,
-    [product_id] int NOT NULL ,
-    [quantity] decimal(18,2) NOT NULL ,
-    [price] money NOT NULL ,
-
-
-    CONSTRAINT [PK_cartitems] PRIMARY KEY CLUSTERED ([cart_item_id] ASC),
-    CONSTRAINT [FK_cart_items_product_id] FOREIGN KEY ([product_id])  REFERENCES [Product]([product_id]),
-    CONSTRAINT [FK_cart_items_cart_id] FOREIGN KEY ([cart_id])  REFERENCES [Cart]([cart_id])
+DROP TABLE IF EXISTS [Order]
+CREATE TABLE [Order] (
+   [transaction_id] INT NOT NULL IDENTITY,
+   [customer_id] INT NOT NULL,
+   [cart_id] INT NOT NULL,
+   [ammount] DECIMAL(18,4) NOT NULL,
+   [status] SMALLINT NOT NULL,
+   PRIMARY KEY ([transaction_id]),
+   CONSTRAINT unique_transaction_id UNIQUE (transaction_id)
 );
 GO
 
-CREATE NONCLUSTERED INDEX [fkIdx_cart_items_cart_id] ON [CartItems] 
- (
-  [cart_id] ASC
- )
-GO
-
-CREATE NONCLUSTERED INDEX [fkIdx_cart_items_product_id] ON [CartItems] 
- (
-  [product_id] ASC
- )
-GO
-
--- Orders
-DROP TABLE IF EXISTS [Orders]
-CREATE TABLE [Orders]
-(
-    [orider_id] int NOT NULL ,
-    [customer_id] int NOT NULL ,
-    [address_id] int NOT NULL ,
-    [cart_item_id] int NOT NULL ,
-    [created] datetime NOT NULL ,
-    [status] bit NOT NULL ,
-    [amount] decimal(18,2) NOT NULL ,
-
-
-    CONSTRAINT [PK_orders] PRIMARY KEY CLUSTERED ([orider_id] ASC),
-    CONSTRAINT [FK_orders_customer_id] FOREIGN KEY ([customer_id])  REFERENCES [Customer]([customer_id]),
-    CONSTRAINT [FK_orders_address_id] FOREIGN KEY ([address_id])  REFERENCES [Address]([address_id]),
-    CONSTRAINT [FK_orders_cart_items_id] FOREIGN KEY ([cart_item_id])  REFERENCES [CartItems]([cart_item_id])
+DROP TABLE IF EXISTS [OrderStatus]
+CREATE TABLE [OrderStatus] (
+   [transaction_status_id] SMALLINT NOT NULL IDENTITY,
+   [name] VARCHAR(10) NOT NULL,
+   PRIMARY KEY ([transaction_status_id])
 );
 GO
 
-CREATE NONCLUSTERED INDEX [fkIdx_orders_customer_id] ON [Orders] 
- (
-  [customer_id] ASC
- )
+DROP TABLE IF EXISTS [Rating]
+CREATE TABLE [Rating] (
+   [rating_id] INT NOT NULL IDENTITY,
+   [customer_id] INT NOT NULL,
+   [product_id] INT NOT NULL,
+   [rating] DECIMAL(18,2) NOT NULL,
+   PRIMARY KEY ([rating_id]),
+   CONSTRAINT unique_rating_id UNIQUE (rating_id)
+);
 GO
 
-CREATE NONCLUSTERED INDEX [fkIdx_orders_address_id] ON [Orders] 
- (
-  [address_id] ASC
- )
+DROP TABLE IF EXISTS [Comment]
+CREATE TABLE [Comment] (
+   [comment_id] INT NOT NULL IDENTITY,
+   [customer_id] INT NOT NULL,
+   [product_id] INT NOT NULL,
+   [message] VARCHAR(1000) NOT NULL,
+   PRIMARY KEY ([comment_id]),
+   CONSTRAINT unique_comment_id UNIQUE (comment_id)
+);
 GO
 
-CREATE NONCLUSTERED INDEX [fkIdx_orders_cart_items_id] ON [Orders] 
- (
-  [cart_item_id] ASC
- )
+ALTER TABLE [Customer] ADD CONSTRAINT [Customer_fk_0_gender_id] FOREIGN KEY (gender_id) REFERENCES Gender([gender_id]) ;
+ALTER TABLE [Customer] ADD CONSTRAINT [Customer_fk_0_address_id] FOREIGN KEY (address_id) REFERENCES Address([address_id]) ;
+ALTER TABLE [Address] ADD CONSTRAINT [Address_fk_0_company_id] FOREIGN KEY (company_id) REFERENCES Company([company_id]) ;
+ALTER TABLE [Product] ADD CONSTRAINT [Product_fk_0_category_id] FOREIGN KEY (category_id) REFERENCES ProductCategory([product_category_id]) ;
+ALTER TABLE [Cart] ADD CONSTRAINT [Cart_fk_0_customer_id] FOREIGN KEY (customer_id) REFERENCES Customer([customer_id]) ;
+ALTER TABLE [CartItem] ADD CONSTRAINT [CartItem_fk_0_cart_id] FOREIGN KEY (cart_id) REFERENCES Cart([cart_id]) ;
+ALTER TABLE [CartItem] ADD CONSTRAINT [CartItem_fk_0_product_id] FOREIGN KEY (product_id) REFERENCES Product([product_id]) ;
+ALTER TABLE [Order] ADD CONSTRAINT [Order_fk_0_customer_id] FOREIGN KEY (customer_id) REFERENCES Customer([customer_id]) ;
+ALTER TABLE [Order] ADD CONSTRAINT [Order_fk_0_cart_id] FOREIGN KEY (cart_id) REFERENCES Cart([cart_id]) ;
+ALTER TABLE [Order] ADD CONSTRAINT [Order_fk_0_status] FOREIGN KEY (status) REFERENCES OrderStatus([transaction_status_id]) ;
+ALTER TABLE [Rating] ADD CONSTRAINT [Rating_fk_0_customer_id] FOREIGN KEY (customer_id) REFERENCES Customer([customer_id]) ;
+ALTER TABLE [Rating] ADD CONSTRAINT [Rating_fk_0_product_id] FOREIGN KEY (product_id) REFERENCES Product([product_id]) ;
+ALTER TABLE [Comment] ADD CONSTRAINT [Comment_fk_0_customer_id] FOREIGN KEY (customer_id) REFERENCES Customer([customer_id]) ;
+ALTER TABLE [Comment] ADD CONSTRAINT [Comment_fk_0_product_id] FOREIGN KEY (product_id) REFERENCES Product([product_id]) ;
 GO
-
