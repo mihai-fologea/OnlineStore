@@ -8,7 +8,8 @@ GO
 USE OnlineStore;
 
 DROP TABLE IF EXISTS [Customer]
-CREATE TABLE [Customer] (
+CREATE TABLE [Customer]
+(
    [customer_id] INT IDENTITY,
    [email] VARCHAR(50) NOT NULL,
    [password] VARCHAR(16) NOT NULL,
@@ -25,7 +26,8 @@ CREATE TABLE [Customer] (
 GO
 
 DROP TABLE IF EXISTS [Address]
-CREATE TABLE [Address] (
+CREATE TABLE [Address]
+(
    [address_id] INT NOT NULL IDENTITY,
    [first_name] VARCHAR(20) NOT NULL,
    [last_name] VARCHAR(20) NOT NULL,
@@ -40,7 +42,8 @@ GO
 
 
 DROP TABLE IF EXISTS [Company]
-CREATE TABLE [Company] (
+CREATE TABLE [Company]
+(
    [company_id] INT NOT NULL IDENTITY,
    [tax_id] VARCHAR(10) NOT NULL,
    [street_address] VARCHAR(200) NOT NULL,
@@ -51,7 +54,8 @@ CREATE TABLE [Company] (
 GO
 
 DROP TABLE IF EXISTS [Product]
-CREATE TABLE [Product] (
+CREATE TABLE [Product]
+(
    [product_id] INT NOT NULL IDENTITY,
    [name] VARCHAR(50) NOT NULL,
    [category_id] INT NOT NULL,
@@ -65,7 +69,8 @@ CREATE TABLE [Product] (
 GO
 
 DROP TABLE IF EXISTS [ProductCategory]
-CREATE TABLE [ProductCategory] (
+CREATE TABLE [ProductCategory]
+(
    [product_category_id] INT NOT NULL IDENTITY,
    [category] VARCHAR(30) NOT NULL,
    PRIMARY KEY ([product_category_id]),
@@ -74,7 +79,8 @@ CREATE TABLE [ProductCategory] (
 GO
 
 DROP TABLE IF EXISTS [Gender]
-CREATE TABLE [Gender] (
+CREATE TABLE [Gender]
+(
    [gender_id] SMALLINT NOT NULL IDENTITY,
    [type] VARCHAR(10) NOT NULL,
    PRIMARY KEY ([gender_id]),
@@ -83,7 +89,8 @@ CREATE TABLE [Gender] (
 GO
 
 DROP TABLE IF EXISTS [Cart]
-CREATE TABLE [Cart] (
+CREATE TABLE [Cart]
+(
    [cart_id] INT NOT NULL IDENTITY,
    [customer_id] INT NOT NULL,
    [created] DATETIME2(0) NOT NULL,
@@ -94,7 +101,8 @@ CREATE TABLE [Cart] (
 GO
 
 DROP TABLE IF EXISTS [CartItem]
-CREATE TABLE [CartItem] (
+CREATE TABLE [CartItem]
+(
    [cart_item_id] INT NOT NULL IDENTITY,
    [cart_id] INT NOT NULL,
    [product_id] INT NOT NULL,
@@ -105,27 +113,30 @@ CREATE TABLE [CartItem] (
 GO
 
 DROP TABLE IF EXISTS [Order]
-CREATE TABLE [Order] (
-   [transaction_id] INT NOT NULL IDENTITY,
+CREATE TABLE [Order]
+(
+   [order_id] INT NOT NULL IDENTITY,
    [customer_id] INT NOT NULL,
    [cart_id] INT NOT NULL,
    [ammount] DECIMAL(18,4) NOT NULL,
    [status] SMALLINT NOT NULL,
-   PRIMARY KEY ([transaction_id]),
-   CONSTRAINT unique_transaction_id UNIQUE (transaction_id)
+   PRIMARY KEY ([order_id]),
+   CONSTRAINT unique_order_id UNIQUE (order_id)
 );
 GO
 
 DROP TABLE IF EXISTS [OrderStatus]
-CREATE TABLE [OrderStatus] (
-   [transaction_status_id] SMALLINT NOT NULL IDENTITY,
+CREATE TABLE [OrderStatus]
+(
+   [order_status_id] SMALLINT NOT NULL IDENTITY,
    [name] VARCHAR(10) NOT NULL,
-   PRIMARY KEY ([transaction_status_id])
+   PRIMARY KEY ([order_status_id])
 );
 GO
 
 DROP TABLE IF EXISTS [Rating]
-CREATE TABLE [Rating] (
+CREATE TABLE [Rating]
+(
    [rating_id] INT NOT NULL IDENTITY,
    [customer_id] INT NOT NULL,
    [product_id] INT NOT NULL,
@@ -136,7 +147,8 @@ CREATE TABLE [Rating] (
 GO
 
 DROP TABLE IF EXISTS [Comment]
-CREATE TABLE [Comment] (
+CREATE TABLE [Comment]
+(
    [comment_id] INT NOT NULL IDENTITY,
    [customer_id] INT NOT NULL,
    [product_id] INT NOT NULL,
@@ -155,7 +167,7 @@ ALTER TABLE [CartItem] ADD CONSTRAINT [CartItem_fk_0_cart_id] FOREIGN KEY (cart_
 ALTER TABLE [CartItem] ADD CONSTRAINT [CartItem_fk_0_product_id] FOREIGN KEY (product_id) REFERENCES Product([product_id]) ;
 ALTER TABLE [Order] ADD CONSTRAINT [Order_fk_0_customer_id] FOREIGN KEY (customer_id) REFERENCES Customer([customer_id]) ;
 ALTER TABLE [Order] ADD CONSTRAINT [Order_fk_0_cart_id] FOREIGN KEY (cart_id) REFERENCES Cart([cart_id]) ;
-ALTER TABLE [Order] ADD CONSTRAINT [Order_fk_0_status] FOREIGN KEY (status) REFERENCES OrderStatus([transaction_status_id]) ;
+ALTER TABLE [Order] ADD CONSTRAINT [Order_fk_0_status] FOREIGN KEY (status) REFERENCES OrderStatus([order_status_id]) ;
 ALTER TABLE [Rating] ADD CONSTRAINT [Rating_fk_0_customer_id] FOREIGN KEY (customer_id) REFERENCES Customer([customer_id]) ;
 ALTER TABLE [Rating] ADD CONSTRAINT [Rating_fk_0_product_id] FOREIGN KEY (product_id) REFERENCES Product([product_id]) ;
 ALTER TABLE [Comment] ADD CONSTRAINT [Comment_fk_0_customer_id] FOREIGN KEY (customer_id) REFERENCES Customer([customer_id]) ;
