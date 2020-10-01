@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[BillingEntities](
 	[TaxId] [varchar](20) NOT NULL,
 	[StreetAddress] [varchar](200) NOT NULL,
 	[City] [varchar](50) NOT NULL,
+	[Country] [varchar](50) NOT NULL,
 	[DateCreated] [datetime2](7) NOT NULL,
 	[DateModified] [datetime2](7) NOT NULL,
 PRIMARY KEY CLUSTERED 
@@ -283,8 +284,9 @@ CREATE TABLE [dbo].[ShippingLocations](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NOT NULL,
 	[StreetAddress] [varchar](200) NOT NULL,
-	[City] [varchar](50) NOT NULL,
 	[PostalCode] [varchar](12) NOT NULL,
+	[City] [varchar](50) NOT NULL,
+	[Country] [varchar](50) NOT NULL,
 	[DateCreated] [datetime2](7) NOT NULL,
 	[DateModified] [datetime2](7) NOT NULL,
 PRIMARY KEY CLUSTERED 
