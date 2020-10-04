@@ -1,6 +1,6 @@
 # [`Customers`]
 
-![Customers Table](/tables_images/Customers.png)
+![Customers Table](/tables_images/customers.png)
 
 ## The `Customers` table stores login data and customer details
 
