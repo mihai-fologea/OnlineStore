@@ -104,7 +104,7 @@ GO
 CREATE TABLE [dbo].[Genders]
 (
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](10) NOT NULL,
+	[Name] [varchar](12) NOT NULL,
 	[DateCreated] [datetime2](7) NOT NULL,
 	[DateModified] [datetime2](7) NOT NULL,
 	PRIMARY KEY CLUSTERED 
@@ -344,59 +344,59 @@ CREATE TABLE [dbo].[ShoppingCarts]
 GO
 -- Add default values for [DateCreated] and [DateModified]
 Print 'Add default values for [DateCreated] and [DateModified]'
-ALTER TABLE [dbo].[BillingEntities] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[BillingEntities] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[BillingEntities] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[BillingEntities] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[CartItems] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[CartItems] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[CartItems] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[CartItems] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[Customers] ADD  DEFAULT ('(getdate())') FOR [BirthDate]
+ALTER TABLE [dbo].[Customers] ADD  DEFAULT (getdate()) FOR [BirthDate]
 GO
-ALTER TABLE [dbo].[Customers] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Customers] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[Customers] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Customers] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[Genders] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Genders] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[Genders] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Genders] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[Images] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Images] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[Images] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Images] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[Orders] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Orders] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[Orders] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Orders] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[OrderStatuses] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[OrderStatuses] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[OrderStatuses] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[OrderStatuses] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[PaymentTypes] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[PaymentTypes] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[PaymentTypes] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[PaymentTypes] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[Products] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Products] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[Products] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Products] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[ProductsCategories] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[ProductsCategories] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[ProductsCategories] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[ProductsCategories] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[Reviews] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Reviews] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[Reviews] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Reviews] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[ShippingLocations] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[ShippingLocations] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[ShippingLocations] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[ShippingLocations] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
-ALTER TABLE [dbo].[ShoppingCarts] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[ShoppingCarts] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
-ALTER TABLE [dbo].[ShoppingCarts] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[ShoppingCarts] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 -- Add relations between tables

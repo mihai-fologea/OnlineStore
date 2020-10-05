@@ -33,10 +33,10 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Images] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Images] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
-ALTER TABLE [dbo].[Images] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Images] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ALTER TABLE [dbo].[Images]  WITH CHECK ADD  CONSTRAINT [Images_fk_0_ProductId] FOREIGN KEY([ProductId])

@@ -30,10 +30,10 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ProductsCategories] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[ProductsCategories] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
-ALTER TABLE [dbo].[ProductsCategories] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[ProductsCategories] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ```

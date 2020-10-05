@@ -19,21 +19,21 @@ CREATE TABLE [dbo].[OrderStatuses](
  [Name] [varchar](10) NOT NULL,
  [DateCreated] [datetime2](7) NOT NULL,
  [DateModified] [datetime2](7) NOT NULL,
-PRIMARY KEY CLUSTERED 
+PRIMARY KEY CLUSTERED
 (
  [id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [unique_order_status_id] UNIQUE NONCLUSTERED 
+ CONSTRAINT [unique_order_status_id] UNIQUE NONCLUSTERED
 (
  [id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[OrderStatuses] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[OrderStatuses] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
-ALTER TABLE [dbo].[OrderStatuses] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[OrderStatuses] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ```

@@ -41,13 +41,13 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Customers] ADD  DEFAULT ('(getdate())') FOR [BirthDate]
+ALTER TABLE [dbo].[Customers] ADD  DEFAULT (getdate()) FOR [BirthDate]
 GO
 
-ALTER TABLE [dbo].[Customers] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Customers] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
-ALTER TABLE [dbo].[Customers] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Customers] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ALTER TABLE [dbo].[Customers]  WITH CHECK ADD  CONSTRAINT [Customers_fk_0_BillingEntityId] FOREIGN KEY([BillingEntityId])

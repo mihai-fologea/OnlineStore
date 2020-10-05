@@ -30,6 +30,6 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Genders] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Genders] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 ```

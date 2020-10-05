@@ -15,27 +15,27 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[CartItems](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[ShoppingCartId] [int] NOT NULL,
-	[ProductId] [int] NOT NULL,
-	[Quantity] [int] NOT NULL,
-	[DateCreated] [datetime2](7) NOT NULL,
-	[DateModified] [datetime2](7) NOT NULL,
-PRIMARY KEY CLUSTERED 
+ [id] [int] IDENTITY(1,1) NOT NULL,
+ [ShoppingCartId] [int] NOT NULL,
+ [ProductId] [int] NOT NULL,
+ [Quantity] [int] NOT NULL,
+ [DateCreated] [datetime2](7) NOT NULL,
+ [DateModified] [datetime2](7) NOT NULL,
+PRIMARY KEY CLUSTERED
 (
-	[id] ASC
+ [id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
- CONSTRAINT [unique_cart_item_id] UNIQUE NONCLUSTERED 
+ CONSTRAINT [unique_cart_item_id] UNIQUE NONCLUSTERED
 (
-	[id] ASC
+ [id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[CartItems] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[CartItems] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
-ALTER TABLE [dbo].[CartItems] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[CartItems] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ALTER TABLE [dbo].[CartItems]  WITH CHECK ADD  CONSTRAINT [CartItems_fk_0_ProductId] FOREIGN KEY([ProductId])

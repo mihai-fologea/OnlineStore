@@ -33,10 +33,10 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Locations] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Locations] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
-ALTER TABLE [dbo].[Locations] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Locations] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ```

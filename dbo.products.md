@@ -34,10 +34,10 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Products] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Products] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
-ALTER TABLE [dbo].[Products] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Products] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ALTER TABLE [dbo].[Products]  WITH CHECK ADD  CONSTRAINT [Products_fk_0_CategoryId] FOREIGN KEY([CategoryId])

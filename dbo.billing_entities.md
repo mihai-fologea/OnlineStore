@@ -31,8 +31,8 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[BillingEntities] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
-ALTER TABLE [dbo].[BillingEntities] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[BillingEntities] ADD  DEFAULT (getdate()) FOR [DateCreated]
+ALTER TABLE [dbo].[BillingEntities] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ```

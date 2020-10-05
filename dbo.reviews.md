@@ -33,10 +33,10 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Reviews] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[Reviews] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
-ALTER TABLE [dbo].[Reviews] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[Reviews] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ALTER TABLE [dbo].[Reviews]  WITH CHECK ADD  CONSTRAINT [Reviews_fk_0_CustomerId] FOREIGN KEY([CustomerId])

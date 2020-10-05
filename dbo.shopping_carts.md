@@ -28,10 +28,10 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ShoppingCarts] ADD  DEFAULT ('(getdate())') FOR [DateCreated]
+ALTER TABLE [dbo].[ShoppingCarts] ADD  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
-ALTER TABLE [dbo].[ShoppingCarts] ADD  DEFAULT ('(getdate())') FOR [DateModified]
+ALTER TABLE [dbo].[ShoppingCarts] ADD  DEFAULT (getdate()) FOR [DateModified]
 GO
 
 ALTER TABLE [dbo].[ShoppingCarts]  WITH CHECK ADD  CONSTRAINT [ShoppingCarts_fk_0_CustomerId] FOREIGN KEY([CustomerId])
