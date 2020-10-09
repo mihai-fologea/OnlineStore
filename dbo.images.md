@@ -17,9 +17,9 @@ GO
 CREATE TABLE [dbo].[Images](
  [id] [int] IDENTITY(1,1) NOT NULL,
  [ProductId] [int] NOT NULL,
- [Name] [varchar](1) NOT NULL,
- [FileName] [varchar](1) NOT NULL,
- [ImageData] [varbinary](1) NOT NULL,
+ [Name] [varchar](32) NOT NULL,
+ [FileName] [varchar](260) NOT NULL,
+ [ImageData] [varbinary](MAX) NOT NULL,
  [DateCreated] [datetime2](7) NOT NULL,
  [DateModified] [datetime2](7) NOT NULL,
 PRIMARY KEY CLUSTERED
