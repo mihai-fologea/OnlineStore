@@ -3,7 +3,7 @@
 ![Database Model](OnlineStore.png)
 [Here you can view the full database creation script](OnlineStore.sql)
 
-## Database tables
+## Database tables details
 
 * [Customers](dbo.customers.md)
 * [Genders](dbo.genders.md)
